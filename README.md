@@ -1,4 +1,6 @@
 # youtube_download
 Python script to download first search result of user inputted query (as mp3). Downloads go to documents by default.
 
-NOTE that youtube_dl module and ffmpeg must first be downloaded to your pc for script to run. Enjoy!
+SYSTEM REQUIREMENTS:
+  Required python modules: Regex, youtube_dl, and urllib.
+  Required external software: FFmpeg for converting audio. Download can be found at ffmpeg.org
