@@ -4,6 +4,8 @@ from youtube_dl import YoutubeDL
 
 query_list = []
 
+print("\nEnter youtube searches consecutively. Enter 'done' to begin downloads.\n\n")
+
 while True:
 	user_search = input("Enter song:\t")
 
