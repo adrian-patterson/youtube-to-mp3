@@ -38,7 +38,6 @@ for query in query_list:  # Loop to iterate over each song and download it to PC
 
 for file in os.listdir(os.getcwd()):
     file_name, file_type = os.path.splitext(file)
-    print(file_type)
     if file_type == ".mp4":
         video_file = VideoFileClip(file)
         audio_file = video_file.audio
