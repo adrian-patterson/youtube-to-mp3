@@ -1,5 +1,6 @@
 import urllib.request		
 import re
+import os
 from yt_dlp import YoutubeDL
 
 def get_user_queries() -> list[str]:
@@ -31,6 +32,11 @@ def download_queries(query_list: list[str]):
 								'preferredcodec': 'mp3',
 								'preferredquality': '192',}],
 		}
+
+		if "Downloads" not in os.listdir():
+			os.mkdir("Downloads")
+
+		os.chdir("Downloads")
 
 		with YoutubeDL(ydl_opts) as ydl:	
 			ydl.download([download_link])
