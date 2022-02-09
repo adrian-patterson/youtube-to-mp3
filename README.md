@@ -12,5 +12,5 @@ Python script to download user searches to desktop (as mp3) using youtube-dl api
     * For Linux, this means running the .exe file in the command line with `./youtube_download_linux`
 
 # System Requirements
-### yt-dlp
-`python3 -m pip install yt-dlp`
+### ffmpeg
+* Follow the installation instructions for your operating system on the [FFmpeg download page](https://ffmpeg.org/download.html)
