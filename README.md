@@ -1,6 +1,6 @@
-# youtube_download.py  
-Python script to download user searches to desktop (as mp3) using pytube api.
+# Youtube to MP3 Automation Application
+Python script to download user searches to desktop (as mp3) using youtube-dl api.
 
-### SYSTEM REQUIREMENTS:<br/>
-* Python modules to install:
-  * `python3 -m pip install yt-dlp`
+# System Requirements
+### yt-dlp
+`python3 -m pip install yt-dlp`
