@@ -3,43 +3,34 @@
 
 import urllib.request		# Necessary libraries
 import re
-import os
-from moviepy.editor import *
-from pytube import YouTube
+from yt_dlp import YoutubeDL
 
-print("\nEnter youtube searches consecutively. Enter 'done' to begin downloads.\n\n")
+print("\nEnter Youtube searches consecutively. Press 'enter' to begin downloads.\n")
 query_list = []
 
 while True:					# Loop to take in user requests for songs
-    user_search = input("Enter song:\t")
+	user_search = input("Song: ")
 
-    if user_search == "done":
-        break
+	if user_search == "":
+		break
+	
+	user_search = user_search.replace(' ',"+")
+	query_list.append(user_search)
+		
 
-    user_search = user_search.replace(' ', "+")
-    query_list.append(user_search)
+for query in query_list:	# Loop to iterate over each song and download it to PC
 
+	html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + query)	# Opens html for song search
+	video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())  # Use of Regex findall to find and decode song IDs from youtube
+	download_link = "https://www.youtube.com/watch?v=" + video_ids[0]	# Finally, the download link is ready
+	print("https://www.youtube.com/watch?v=" + video_ids[0])
 
-for query in query_list:  # Loop to iterate over each song and download it to PC
+	ydl_opts = {			# Sets options for youtube downloader
+		'format': 'bestaudio/best',
+		'postprocessors': [{'key': 'FFmpegExtractAudio',
+			            'preferredcodec': 'mp3',
+			            'preferredquality': '192',}],
+	       }
 
-    # Opens html for song search
-    html = urllib.request.urlopen(
-        "https://www.youtube.com/results?search_query=" + query)
-    # Use of Regex findall to find and decode song IDs from youtube
-    video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
-    download_link = "https://www.youtube.com/watch?v=" + \
-        video_ids[0]  # Finally, the download link is ready
-    print("Downloading from " +
-          "https://www.youtube.com/watch?v=" + video_ids[0])
-
-    youtube = YouTube(download_link)
-    youtube.streams.filter(progressive=True, file_extension='mp4').order_by(
-        'resolution').desc().first().download()
-
-for file in os.listdir(os.getcwd()):
-    file_name, file_type = os.path.splitext(file)
-    if file_type == ".mp4":
-        video_file = VideoFileClip(file)
-        audio_file = video_file.audio
-        audio_file.write_audiofile(file_name + ".mp3")
-        os.remove(file)
+	with YoutubeDL(ydl_opts) as ydl:	# Downloads the song to the PC using youtube_dl
+		ydl.download([download_link])
