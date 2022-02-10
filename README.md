@@ -1,10 +1,6 @@
 # Youtube to MP3 Automation Application
 Python script to download user searches to desktop (as mp3) using youtube-dl api.
 
-# Todo
-1. Rebuild exe's
-2. Build exe for M1 mac
-
 # How to Run
 1. Install dependencies listed in the section below
 2. Open a terminal and go to directory of script
