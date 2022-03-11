@@ -20,6 +20,11 @@ def get_user_queries() -> list[str]:
 		
 
 def download_queries(query_list: list[str]):
+	if "Downloads" not in os.listdir():
+		os.mkdir("Downloads")
+
+	os.chdir("Downloads")
+	
 	for query in query_list:	
 		html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + query)	
 		video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())  
@@ -33,10 +38,6 @@ def download_queries(query_list: list[str]):
 								'preferredquality': '192',}],
 		}
 
-		if "Downloads" not in os.listdir():
-			os.mkdir("Downloads")
-
-		os.chdir("Downloads")
 
 		with YoutubeDL(ydl_opts) as ydl:	
 			ydl.download([download_link])
